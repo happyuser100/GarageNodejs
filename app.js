@@ -3,6 +3,7 @@ const mongoose = require("mongoose");
 const garageRouter = require("./routes/GarageRoutes");
 
 const app = express();
+const cors = require("cors");
 
 //configure mongoose
 mongoose.connect(process.env.MONGO_URL ? process.env.MONGO_URL : 'mongodb://127.0.0.1:27017/garages', {
@@ -17,6 +18,7 @@ mongoose.connect(process.env.MONGO_URL ? process.env.MONGO_URL : 'mongodb://127.
   });
 
 //middleware
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use("/api/garages", garageRouter);
